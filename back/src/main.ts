@@ -16,8 +16,6 @@ async function bootstrap() {
     credentials: true, // Permite el uso de cookies y encabezados de autenticación
   });
 
-  //termina configuracion de cors
-
   app.useGlobalPipes(new ValidationPipe());
 
   const swaggerConfig = new DocumentBuilder()
@@ -30,7 +28,9 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, swaggerConfig);
   SwaggerModule.setup("api", app, document);
 
-  await app.listen(3010);
+  const port = process.env.PORT || 3000; // Usa process.env.PORT
+  await app.listen(port);
+  console.log(`Aplicación escuchando en el puerto ${port}`);
 }
 
 bootstrap();
